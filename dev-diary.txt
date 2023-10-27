@@ -1,0 +1,93 @@
+TODOs:
+    * figure out how to set up type annotations
+    * figure out how to set up rubocop in vscode (extension doesn't seem to like my rbenv setup)
+
+https://www.ruby-lang.org/en/documentation/ruby-from-other-languages/to-ruby-from-python/
+
+"There is good support for functional programming with first-class functions, anonymous functions, and closures."
+    :)
+
+"You never directly access attributes. With Ruby, it’s all method calls."
+"Parentheses for method calls are usually optional."
+    :(
+
+"There’s public, private, and protected to enforce access, instead of Python’s _voluntary_ underscore __convention__."
+    i like that
+
+"When tested for truth, only false and nil evaluate to a false value. Everything else is true (including 0, 0.0, "", and [])."
+
+dict syntax
+    { "one" => "eins", "two" => "zwei", "three" => "drei" }
+    "hashes" not dicts
+
+These ratings are not strings. When you place a colon in front of a simple word,
+you get a symbol. Symbols are cheaper than strings (in terms of computer
+memory.) If you use a word over and over in your program, use a symbol. Rather
+than having thousands of copies of that word in memory, the computer will store
+the symbol only once.
+    :foo
+
+working through https://try.ruby-lang.org/
+
+.each can be called on numbers, arrays, hashes, takes a block
+.select lets you filter, also takes a block
+
+    def print_plays(year_from, year_to)
+    get_shakey["William Shakespeare"]
+        .select { |k, v|
+        year_from <= v["finished"] &&
+        year_to   >= v["finished"]
+        }.each { |k, v|
+        puts "#{v["title"].ljust(30)} #{v["finished"]}"
+        }
+    end
+    print_plays(1600, 1605)
+
+    First replace Jimmy with #{}. If Ruby sees a hash symbol # followed by a curly
+    brace { it looks for a variable between the first brace and the following
+    closing brace }. So we can use this: “Hi, my name is #{name}”.
+
+    class Blurb
+    attr_accessor :content, :time, :mood
+
+    def initialize(mood, content="")
+        @time    = Time.now
+        @content = content[0..39]
+        @mood    = mood
+    end
+    end
+
+    Blurb.new(:sick).time
+
+so @ is basically self
+
+    class Blurbalizer
+    def initialize(title)
+        @title  = title
+        @blurbs = [] # A fresh clean array
+                    # for storing Blurbs
+    end
+
+    def add_a_blurb(mood, content)
+        # The << means add to the end of the array
+        @blurbs << Blurb.new(mood, content)
+    end
+
+    def show_timeline
+        puts "Blurbify: #{@title} has #{@blurbs.count} Blurbs"
+
+        @blurbs.sort_by { |t|
+        t.time
+        }.reverse.each { |t|
+        puts "#{t.content.ljust(40)} #{t.time}"
+        }
+    end
+    end
+
+    myapp = Blurbalizer.new "The Big Blurb"
+
+so you append to a list by doing list << new_item
+
+ok done w tryruby
+let's do an aoc problem
+starting 2021
