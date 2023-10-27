@@ -91,3 +91,36 @@ so you append to a list by doing list << new_item
 ok done w tryruby
 let's do an aoc problem
 starting 2021
+
+ok cool day 1 part 1 ez
+
+now let's figure out how to set up type annotations
+https://betterprogramming.pub/why-i-stopped-using-sorbet-in-all-my-ruby-projects-9366bf6dd116
+"code becomes bloated" lol go fuck yourself
+
+second argument is they spent a lot of time typing all of their dependencies - just dont do that, its ok
+
+most compelling argument is that ruby 3 had the chance to handle type annotations better but matz doesnt like type annotations
+boo to matz. boo to ruby.
+
+https://zverok.space/blog/2023-05-05-ruby-types.html
+    Matz commented on the issue, saying that he acknowledges the demand but
+    personally never liked the idea, basically considering annotations
+    redundant, “not DRY.”
+
+    BOOOOOOO
+    BOOOOOOOOOOOOOO
+
+https://sorbet.org/blog/2020/07/30/ruby-3-rbs-sorbet
+
+getting vscode to play nice w ruby/rbenv has been a nightmare so far
+
+maybe i'll just use asdf
+
+ok gonna start part 2 while installing asdf
+
+part 2 done
+
+ok i have asdf set up
+
+TODO get sorbet vscode extension working
