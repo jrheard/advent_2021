@@ -108,5 +108,3 @@ ENV/
 *.swo
 
 .vscode/
-
-bin/
