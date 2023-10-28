@@ -1,8 +1,5 @@
 # typed: true
 
-# "Count the number of times a depth measurement increases from the previous
-# measurement. (There is no measurement before the first measurement.) "
-
 # TODO: is this main class necessary???
 class Main
   extend T::Sig
@@ -14,18 +11,22 @@ class Main
     end
   end
 
+  # "Count the number of times a depth measurement increases from the previous
+  # measurement. (There is no measurement before the first measurement.) "
+  sig { returns(Integer) }
   def part_one
     depths = load_input
 
-    depths.zip(depths[1..]).select do |depth_1, depth_2|
-      !depth_2.nil? && depth_2 > depth_1
+    depths.zip(T.must(depths[1..])).select do |depth_one, depth_two|
+      !depth_two.nil? && depth_two > depth_one
     end.count
   end
 
+  sig { returns(Integer) }
   def part_two
     depths = load_input
 
-    last_window_sum = depths[0..2].sum
+    last_window_sum = T.must(depths[0..2]).sum
     result = 0
     depths.each_cons(3).each do |window|
       result += 1 if window.sum > last_window_sum
@@ -39,6 +40,6 @@ class Main
   end
 end
 
-puts part_one
-
-puts part_two
+main = Main.new
+puts main.part_one
+puts main.part_two
