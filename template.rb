@@ -2,17 +2,24 @@
 
 require 'sorbet-runtime'
 
-extend T::Sig
+module DayFoo
+  extend T::Sig
 
-sig { returns(Integer) }
-def part_one
-  -1
+  sig { void }
+  def self.load_input
+    -1
+  end
+
+  sig { returns(Integer) }
+  def self.part_one
+    -1
+  end
+
+  sig { returns(Integer) }
+  def self.part_two
+    -1
+  end
 end
 
-sig { returns(Integer) }
-def part_two
-  -1
-end
-
-puts part_one
-puts part_two
+puts DayFoo.part_one
+puts DayFoo.part_two
