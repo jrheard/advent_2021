@@ -123,4 +123,97 @@ part 2 done
 
 ok i have asdf set up
 
-TODO get sorbet vscode extension working
+DONE get sorbet vscode extension working
+
+ok i updated my os (i was two major os versions behind!) and messed around w various things
+one of my main issues was that i was doing extend T::sig instead of extend T::Sig, whoops
+
+so now we pass sorbet and things are looking good
+i'm reading through more sorbet docs
+T.must asserts something nilable is not nil
+
+some notes on runtime check perf tricks in https://sorbet.org/docs/type-assertions
+
+https://sorbet.org/docs/troubleshooting
+
+https://sorbet.org/docs/faq
+    long, i'll read this later
+
+so for day 1 part 2 i have this
+
+
+  sig { returns(Integer) }
+  def part_two
+    depths = load_input
+
+    last_window_sum = T.must(depths[0..2]).sum
+    result = 0
+    depths.each_cons(3).each do |window|
+      result += 1 if window.sum > last_window_sum
+
+      last_window_sum = window.sum
+    end
+
+    result
+
+i was hoping to see if i could use some neato zip-style approach instead of a .each forloop
+let's see
+
+ok i think this should work
+
+  sig { returns(Integer) }
+  def part_two
+    depths = load_input
+
+    windows = depths.each_cons(3).map(&:sum)
+
+    windows.zip(T.must(windows[1..])).select do |window_one, window_two|
+      !window_two.nil? && window_two > window_one
+    end.count
+  end
+
+but now i'm having trouble running the program
+
+    [jrheard@erebus:advent_2021]  main
+    🚂  ruby day_1.rb
+    day_1.rb:5:in `<class:Main>': uninitialized constant Main::T (NameError)
+
+    extend T::Sig
+            ^^^^^
+            from day_1.rb:4:in `<main>'
+
+    [jrheard@erebus:advent_2021]  main [!]
+    🚂  bundle exec ruby day_1.rb
+    day_1.rb:5:in `<class:Main>': uninitialized constant Main::T (NameError)
+
+    extend T::Sig
+            ^^^^^
+            from day_1.rb:4:in `<main>'
+
+something i've done since sitting down today must have caused an issue
+or i'm not invoking the program correctly
+let's figure it out
+
+i suspect it's because of group development
+    gem 'sorbet', group: :development
+
+how can i run the program in a development group context?
+no, that doesn't seem to be it
+
+ok it looks like the issue is that i had removed this
+    require 'sorbet-runtime'
+
+so i guess that really is necessary, cool cool
+
+also it's been bugging me that i have to wrap my code in a Main module/class to get sorbet to work
+let's read https://github.com/sorbet/sorbet/pull/3491
+
+ok cool doesn't seem necessary, ezpz
+had to quiet a rubocop lint complaining about mixin usage at top level but thats ok
+
+ok i think i'm happy with day 1 now! :)
+
+also, TODO figure out what &:sum means here
+    windows = depths.each_cons(3).map(&:sum)
+
+it told me to do that instead of doing a block like |x| x.sum
