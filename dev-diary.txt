@@ -1,7 +1,3 @@
-TODOs:
-    * figure out how to set up type annotations
-    * figure out how to set up rubocop in vscode (extension doesn't seem to like my rbenv setup)
-
 https://www.ruby-lang.org/en/documentation/ruby-from-other-languages/to-ruby-from-python/
 
 "There is good support for functional programming with first-class functions, anonymous functions, and closures."
@@ -217,3 +213,48 @@ also, TODO figure out what &:sum means here
     windows = depths.each_cons(3).map(&:sum)
 
 it told me to do that instead of doing a block like |x| x.sum
+
+    https://stackoverflow.com/questions/1961030/ruby-ampersand-colon-shortcut
+
+    Your question is wrong, so to speak. What's happening here isn't "ampersand and
+    colon", it's "ampersand and object". The colon in this case is for the symbol.
+    So, there's & and there's :foo.
+
+    The & calls to_proc on the object, and passes it as a block to the method. In
+    Ruby, to_proc is implemented on Symbol, so that these two calls are equivalent:
+
+    something {|i| i.foo } something(&:foo) So, to sum up: & calls to_proc on the
+    object and passes it as a block to the method, and Ruby implements to_proc on
+    Symbol.
+
+ok cool neat
+
+https://stackoverflow.com/questions/14881125/what-does-to-proc-method-mean-in-ruby
+
+ok cool whatever
+
+oh my god everything in all ruby files in the project ends up in the same namespace
+so def load_input() in one .rb file collides with def load_input() in another .rb file even without importing the other file
+lol that's stupid
+
+lol ruby's all "DRY is important" but you have to boilerplate each file into a module
+and also a two-line python dataclass ends up looking like this
+
+  class Instruction
+    extend T::Sig
+
+    sig { returns(Symbol) }
+    attr_reader :direction
+
+    sig { returns(Integer) }
+    attr_reader :magnitude
+
+    sig { params(direction: Symbol, magnitude: Integer).void }
+    def initialize(direction, magnitude)
+      @direction = direction
+      @magnitude = magnitude
+    end
+  end
+
+lol.
+:( :( :( :( :(
