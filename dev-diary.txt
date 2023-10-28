@@ -258,3 +258,36 @@ and also a two-line python dataclass ends up looking like this
 
 lol.
 :( :( :( :( :(
+
+ok anyway day 2 part 1 done
+taking a sec to read another tab
+
+https://www.ruby-lang.org/en/documentation/ruby-from-other-languages/
+
+suggests running `ri Enumerable`
+neat, shows lots of handy methods
+eg
+    * #include?, #member?: Returns true if self == object, false otherwise.
+    * #all?: Returns true if all elements meet a specified criterion; false
+    otherwise.
+    * #any?: Returns true if any element meets a specified criterion; false
+    otherwise.
+    * #none?: Returns true if no element meets a specified criterion; false
+    otherwise.
+    * #one?: Returns true if exactly one element meets a specified
+    criterion; false otherwise.
+    * #count: Returns the count of elements, based on an argument or block
+    criterion, if given.
+    * #tally: Returns a new Hash containing the counts of occurrences of
+    each element.
+
+oh neat, count takes a block! handy
+
+i like enumerable!
+
+    If you’re in doubt whether to use a Symbol or a String, consider what’s more
+    important: the identity of an object (i.e. a Hash key), or the contents (in the
+    example above, “george”).
+
+ok cool fine done w that page
+part 2 now

@@ -18,9 +18,9 @@ module DayOne
   def self.part_one
     depths = load_input
 
-    depths.zip(T.must(depths[1..])).select do |depth_one, depth_two|
+    depths.zip(T.must(depths[1..])).count do |depth_one, depth_two|
       !depth_two.nil? && depth_two > depth_one
-    end.count
+    end
   end
 
   # "Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?"
@@ -30,9 +30,9 @@ module DayOne
 
     window_sums = depths.each_cons(3).map(&:sum)
 
-    window_sums.zip(T.must(window_sums[1..])).select do |window_one, window_two|
+    window_sums.zip(T.must(window_sums[1..])).count do |window_one, window_two|
       !window_two.nil? && window_two > window_one
-    end.count
+    end
   end
 end
 

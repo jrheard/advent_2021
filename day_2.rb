@@ -36,7 +36,31 @@ module DayTwo
 
   sig { returns(Integer) }
   def self.part_two
-    -1
+    x = 0
+    y = 0
+    aim = 0
+    load_input.each do |line|
+      # Lines look like "forward 5".
+      magnitude = Integer(T.must(line.split[1]))
+
+      case T.must(line.split[0])
+      when 'forward'
+        # "forward X does two things:
+        # It increases your horizontal position by X units.
+        # It increases your depth by your aim multiplied by X."
+
+        x += magnitude
+        y += magnitude * aim
+
+      when 'down'
+        aim += magnitude
+      when 'up'
+        aim -= magnitude
+      end
+    end
+
+    # "What do you get if you multiply your final horizontal position by your final depth?"
+    x * y
   end
 end
 
