@@ -5,9 +5,9 @@ require 'sorbet-runtime'
 module DayFoo
   extend T::Sig
 
-  sig { void }
+  sig { returns(T::Array[String]) }
   def self.load_input
-    -1
+    File.readlines('inputs/day_2.txt', chomp: true)
   end
 
   sig { returns(Integer) }

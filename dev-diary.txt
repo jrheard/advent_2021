@@ -291,3 +291,8 @@ i like enumerable!
 
 ok cool fine done w that page
 part 2 now
+
+part 2 done
+
+https://medium.com/@baweaver/functional-programming-in-ruby-state-5e55d40b4e67
+is fine but nothing interesting in there for me, pretty basic
