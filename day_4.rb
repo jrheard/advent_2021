@@ -90,7 +90,16 @@ module DayFour
 
   sig { returns(Integer) }
   def self.part_one
-    load_input
+    numbers_to_call, boards = load_input
+
+    numbers_to_call.each do |number|
+      boards.each do |board|
+        board.mark_number(number)
+        score = board.score
+        return score if score
+      end
+    end
+
     -1
   end
 
