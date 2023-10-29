@@ -367,3 +367,41 @@ https://sorbet.org/docs/faq
 
     union types T.any() https://sorbet.org/docs/union-types
     use .fetch(i) instead of T.must(array[i]), neat
+
+day 5 part 1 done
+looks like shit tho
+
+    num_vents_by_position = T.let(Hash.new { 0 }, T::Hash[[Integer, Integer], Integer])
+
+    load_input.each do |vent|
+      # "For now, only consider horizontal and vertical lines: lines where either x1 = x2 or y1 = y2."
+      if vent.start_x == vent.end_x
+        ([vent.start_y, vent.end_y].min..[vent.start_y, vent.end_y].max).each do |y|
+          num_vents_by_position[[vent.start_x, y]] = T.must(num_vents_by_position[[vent.start_x, y]]) + 1
+        end
+      end
+      next unless vent.start_y == vent.end_y
+
+      ([vent.start_x, vent.end_x].min..[vent.start_x, vent.end_x].max).each do |x|
+        num_vents_by_position[[x, vent.start_y]] = T.must(num_vents_by_position[[x, vent.start_y]]) + 1
+      end
+    end
+
+that is so gross
+i think it'd be better if:
+    * i do a .select pass over vents to filter out diagonal ones, and
+    * i have the OceanVent class expose some kind of .range method
+
+ok done, i made it better :)
+
+    load_input.select do |vent|
+      # "For now, only consider horizontal and vertical lines: lines where either x1 = x2 or y1 = y2."
+      vent.start_x == vent.end_x || vent.start_y == vent.end_y
+    end.each do |vent|
+      vent.range.each do |x, y|
+        num_vents_by_position[[x, y]] = T.must(num_vents_by_position[[x, y]]) + 1
+      end
+    end
+
+not a fan of having to do a T.must() in there instead of doing +=, doesn't seem like sorbet knows about hashes with defaults
+oh well
