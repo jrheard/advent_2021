@@ -88,6 +88,8 @@ module DayFour
     ]
   end
 
+  # "To guarantee victory against the giant squid, figure out which board will
+  # win first. What will your final score be if you choose that board?"
   sig { returns(Integer) }
   def self.part_one
     numbers_to_call, boards = load_input
@@ -103,8 +105,22 @@ module DayFour
     -1
   end
 
+  # "Figure out which board will win last. Once it wins, what would its final score be?"
   sig { returns(Integer) }
   def self.part_two
+    numbers_to_call, boards = load_input
+
+    numbers_to_call.each do |number|
+      boards.each do |board|
+        board.mark_number(number)
+        next unless board.won?
+
+        return T.must(board.score) if boards.count == 1
+
+        boards = boards.reject { |b| board == b }
+      end
+    end
+
     -1
   end
 end

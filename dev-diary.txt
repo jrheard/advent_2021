@@ -345,3 +345,9 @@ https://www.rubypigeon.com/posts/avoid-mutation-functional-style-in-ruby/
 https://patshaughnessy.net/2013/4/3/ruby-2-0-works-hard-so-you-can-be-lazy
     looks like laziness is opt-in in ruby, you have to do .lazy in your iterator chair explicitly
     neat article but too long, i'll reread this sometime in the distant future if i do end up having to be a rubyist
+
+day 4 part 1 done
+that was pretty educational, lot of unfamiliar syntax
+ruby is taking some practice but we're getting there
+the enumerable api is taking a bit of getting used to
+and the sorbet syntax is pretty unwieldy but beats nothing
