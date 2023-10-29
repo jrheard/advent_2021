@@ -55,13 +55,13 @@ module DayThree
   # position being considered."
   sig { params(numbers: T::Array[String]).returns(String) }
   def self.find_oxygen_generator_rating(numbers)
-    ideal_number = choose_bit_per_position(tallies_by_position_for_numbers(numbers), :max_by, '1')
-
-    # TODO: can i express this better?
     candidates = numbers
-    ideal_number.each_char.with_index do |char, i|
+    bits_per_number = T.must(numbers[0]).length
+
+    (0..bits_per_number - 1).each do |i|
+      ideal_number = choose_bit_per_position(tallies_by_position_for_numbers(candidates), :max_by, '1')
       candidates = candidates.select do |number|
-        number[i] == char
+        number[i] == ideal_number[i]
       end
 
       break if candidates.count == 1
@@ -76,13 +76,13 @@ module DayThree
   # position being considered."
   sig { params(numbers: T::Array[String]).returns(String) }
   def self.find_co2_scrubber_rating(numbers)
-    ideal_number = choose_bit_per_position(tallies_by_position_for_numbers(numbers), :min_by, '0')
-
-    # TODO: can i express this better?
     candidates = numbers
-    ideal_number.each_char.with_index do |char, i|
+    bits_per_number = T.must(numbers[0]).length
+
+    (0..bits_per_number - 1).each do |i|
+      ideal_number = choose_bit_per_position(tallies_by_position_for_numbers(candidates), :min_by, '0')
       candidates = candidates.select do |number|
-        number[i] == char
+        number[i] == ideal_number[i]
       end
 
       break if candidates.count == 1
