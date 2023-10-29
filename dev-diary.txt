@@ -356,7 +356,11 @@ part 2 ez
 
 sorbet maintainer blog https://blog.jez.io/#all-posts
 
+https://sorbet.org/docs/tenum
+    neat
+
 https://sorbet.org/docs/faq
+    TODO keep reading this
     T.cast will be useful i'm sure
 
     lotta stuff in here
