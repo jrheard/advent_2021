@@ -296,3 +296,24 @@ part 2 done
 
 https://medium.com/@baweaver/functional-programming-in-ruby-state-5e55d40b4e67
 is fine but nothing interesting in there for me, pretty basic
+
+day 3 part 1 done
+
+https://www.rubyguides.com/2018/01/functional-programming-ruby/
+
+also extremely surface level
+
+found this https://sorbet.org/docs/tstruct - is this like dataclasses?
+could it fix the stuff i was complaining about around line 240?
+
+yes dude awesome
+
+  class Instruction < T::Struct
+    const :direction, Symbol
+    const :magnitude, Integer
+  end
+
+sick :)
+
+https://www.rubypigeon.com/posts/avoid-mutation-functional-style-in-ruby/
+TODO read this next time i sit down

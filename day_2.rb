@@ -1,13 +1,24 @@
-# typed: true
+# typed: strict
 
 require 'sorbet-runtime'
 
 module DayTwo
   extend T::Sig
 
-  sig { returns(T::Array[String]) }
+  class Instruction < T::Struct
+    const :direction, Symbol
+    const :magnitude, Integer
+  end
+
+  sig { returns(T::Array[Instruction]) }
   def self.load_input
-    File.readlines('inputs/day_2.txt', chomp: true)
+    File.readlines('inputs/day_2.txt', chomp: true).map do |line|
+      # Lines look like "forward 5".
+      Instruction.new(
+        direction: T.must(line.split[0]).to_sym,
+        magnitude: Integer(T.must(line.split[1]))
+      )
+    end
   end
 
   # "Calculate the horizontal position and depth you would have after following
@@ -17,17 +28,14 @@ module DayTwo
   def self.part_one
     x = 0
     y = 0
-    load_input.each do |line|
-      # Lines look like "forward 5".
-      magnitude = Integer(T.must(line.split[1]))
-
-      case T.must(line.split[0])
-      when 'forward'
-        x += magnitude
-      when 'down'
-        y += magnitude
-      when 'up'
-        y -= magnitude
+    load_input.each do |instruction|
+      case instruction.direction
+      when :forward
+        x += instruction.magnitude
+      when :down
+        y += instruction.magnitude
+      when :up
+        y -= instruction.magnitude
       end
     end
 
@@ -39,23 +47,20 @@ module DayTwo
     x = 0
     y = 0
     aim = 0
-    load_input.each do |line|
-      # Lines look like "forward 5".
-      magnitude = Integer(T.must(line.split[1]))
-
-      case T.must(line.split[0])
-      when 'forward'
+    load_input.each do |instruction|
+      case instruction.direction
+      when :forward
         # "forward X does two things:
         # It increases your horizontal position by X units.
         # It increases your depth by your aim multiplied by X."
 
-        x += magnitude
-        y += magnitude * aim
+        x += instruction.magnitude
+        y += instruction.magnitude * aim
 
-      when 'down'
-        aim += magnitude
-      when 'up'
-        aim -= magnitude
+      when :down
+        aim += instruction.magnitude
+      when :up
+        aim -= instruction.magnitude
       end
     end
 
