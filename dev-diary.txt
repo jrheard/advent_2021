@@ -315,5 +315,21 @@ yes dude awesome
 
 sick :)
 
+reading the rest of https://sorbet.org/docs/tstruct
+
+    "Sorbet does not allow inheriting from a class which inherits from T::Struct."
+
+    <3
+    lol they say it's for perf but whatever, works for me
+
+https://sorbet.org/docs/tstruct#legacy-code-and-historical-context
+    * don't try to serialize/deserialize them
+    * they do reference equality instead of value equality (boo!!!)
+        this is a BIG wart :(
+    * .with() is like .replace() except it does a seralize/deserialize so you can't use it
+
+fine
+day 3 part 2 now
+
 https://www.rubypigeon.com/posts/avoid-mutation-functional-style-in-ruby/
 TODO read this next time i sit down
