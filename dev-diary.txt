@@ -351,3 +351,15 @@ that was pretty educational, lot of unfamiliar syntax
 ruby is taking some practice but we're getting there
 the enumerable api is taking a bit of getting used to
 and the sorbet syntax is pretty unwieldy but beats nothing
+
+part 2 ez
+
+sorbet maintainer blog https://blog.jez.io/#all-posts
+
+https://sorbet.org/docs/faq
+    T.cast will be useful i'm sure
+
+    lotta stuff in here
+
+    union types T.any() https://sorbet.org/docs/union-types
+    use .fetch(i) instead of T.must(array[i]), neat

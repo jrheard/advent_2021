@@ -15,8 +15,8 @@ module DayTwo
     File.readlines('inputs/day_2.txt', chomp: true).map do |line|
       # Lines look like "forward 5".
       Instruction.new(
-        direction: T.must(line.split[0]).to_sym,
-        magnitude: Integer(T.must(line.split[1]))
+        direction: line.split.fetch(0).to_sym,
+        magnitude: Integer(line.split.fetch(1))
       )
     end
   end

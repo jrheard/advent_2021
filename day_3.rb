@@ -15,7 +15,7 @@ module DayThree
 
   sig { params(numbers: T::Array[String]).returns(Tallies) }
   def self.tallies_by_position_for_numbers(numbers)
-    bits_per_number = T.must(numbers[0]).length
+    bits_per_number = numbers.fetch(0).length
 
     (0..bits_per_number - 1).map do |i|
       numbers.map do |number|
@@ -58,7 +58,7 @@ module DayThree
   sig { params(numbers: T::Array[String]).returns(String) }
   def self.find_oxygen_generator_rating(numbers)
     candidates = numbers
-    bits_per_number = T.must(numbers[0]).length
+    bits_per_number = numbers.fetch(0).length
 
     (0..bits_per_number - 1).each do |i|
       ideal_number = choose_bit_per_position(tallies_by_position_for_numbers(candidates), :max_by, '1')
@@ -69,7 +69,7 @@ module DayThree
       break if candidates.count == 1
     end
 
-    T.must(candidates[0])
+    candidates.fetch(0)
   end
 
   # "To find CO2 scrubber rating, determine the least common value (0 or 1) in
@@ -79,7 +79,7 @@ module DayThree
   sig { params(numbers: T::Array[String]).returns(String) }
   def self.find_co2_scrubber_rating(numbers)
     candidates = numbers
-    bits_per_number = T.must(numbers[0]).length
+    bits_per_number = numbers.fetch(0).length
 
     (0..bits_per_number - 1).each do |i|
       ideal_number = choose_bit_per_position(tallies_by_position_for_numbers(candidates), :min_by, '0')
@@ -90,7 +90,7 @@ module DayThree
       break if candidates.count == 1
     end
 
-    T.must(candidates[0])
+    candidates.fetch(0)
   end
 
   sig { returns(Integer) }

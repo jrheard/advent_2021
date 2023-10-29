@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 
 require 'sorbet-runtime'
 
@@ -65,12 +65,12 @@ module DayFour
       unmarked_numbers_sum = (0..24).reject do |i|
         @marked_positions.include?(index_to_position(i))
       end.map do |i|
-        T.must(@contents[i])
+        @contents.fetch(i)
       end.sum
 
       x, y = T.must(@marked_positions.last)
 
-      unmarked_numbers_sum * T.must(@contents[y * 5 + x])
+      unmarked_numbers_sum * @contents.fetch(y * 5 + x)
     end
   end
 
@@ -79,7 +79,7 @@ module DayFour
     lines = File.readlines('inputs/day_4.txt', chomp: true)
 
     [
-      T.must(lines[0]).split(',').map do |num|
+      lines.fetch(0).split(',').map do |num|
         Integer(num)
       end,
       T.must(lines[2..]).each_slice(6).map do |lines_slice|
