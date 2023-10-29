@@ -26,6 +26,14 @@ module DayFour
       @marked_positions = T.let([], T::Array[[Integer, Integer]])
     end
 
+    sig { params(index: Integer).returns([Integer, Integer]) }
+    def index_to_position(index)
+      [
+        index % 5,
+        index / 5
+      ]
+    end
+
     # "Numbers are chosen at random, and the chosen number is marked on all
     # boards on which it appears. (Numbers may not appear on all boards.)"
     sig { params(num: Integer).void }
@@ -33,10 +41,7 @@ module DayFour
       index = @contents.index(num)
       return unless index
 
-      @marked_positions << [
-        index % 5,
-        index / 5
-      ]
+      @marked_positions << index_to_position(index)
     end
 
     # "If all numbers in any row or any column of a board are marked, that board wins. (Diagonals don't count.)"
@@ -57,21 +62,15 @@ module DayFour
     def score
       return nil unless won?
 
-      positions = (0..24).map do |i|
-        [i % 5, i / 5]
-      end
-      unmarked_positions_and_indexes = positions.each_with_index.reject do |position, _i|
-        @marked_positions.include?(position)
-      end
-      marked_positions_and_indexes = positions.each_with_index.select do |position, _i|
-        @marked_positions.include?(position)
-      end
+      unmarked_numbers_sum = (0..24).reject do |i|
+        @marked_positions.include?(index_to_position(i))
+      end.map do |i|
+        T.must(@contents[i])
+      end.sum
 
-      T.must(marked_positions_and_indexes.map do |_position, i|
-        @contents[i]
-      end.sum) * T.must(unmarked_positions_and_indexes.map do |_position, i|
-                          @contents[i]
-                        end.sum)
+      x, y = T.must(@marked_positions.last)
+
+      unmarked_numbers_sum * T.must(@contents[y * 5 + x])
     end
   end
 
