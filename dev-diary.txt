@@ -330,6 +330,18 @@ https://sorbet.org/docs/tstruct#legacy-code-and-historical-context
 
 fine
 day 3 part 2 now
+done
 
 https://www.rubypigeon.com/posts/avoid-mutation-functional-style-in-ruby/
-TODO read this next time i sit down
+    not super well written
+    actually it does get a bit better toward the end, just a weak beginning
+    doesn't talk about side effects, just talks about avoiding LOCAL mutation, which doesn't matter as much as avoiding side effects
+
+    "In practise, however, performance is rarely an issue. Typically you’re only
+    working with small data sets, like an array of 100 immutable objects. "
+
+    i definitely agree w that ^
+
+https://patshaughnessy.net/2013/4/3/ruby-2-0-works-hard-so-you-can-be-lazy
+    looks like laziness is opt-in in ruby, you have to do .lazy in your iterator chair explicitly
+    neat article but too long, i'll reread this sometime in the distant future if i do end up having to be a rubyist

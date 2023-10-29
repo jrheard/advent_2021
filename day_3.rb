@@ -26,6 +26,8 @@ module DayThree
 
   sig { params(tallies: Tallies, max_by_or_min_by: Symbol, default: T.nilable(String)).returns(String) }
   def self.choose_bit_per_position(tallies, max_by_or_min_by, default)
+    raise unless %i[max_by min_by].include?(max_by_or_min_by)
+
     tallies.map do |tally|
       if default && tally['0'] == tally['1']
         default
