@@ -405,3 +405,5 @@ ok done, i made it better :)
 
 not a fan of having to do a T.must() in there instead of doing +=, doesn't seem like sorbet knows about hashes with defaults
 oh well
+
+ok, did a day of 2020 in python to prep for an interview, back to ruby 2021

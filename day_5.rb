@@ -15,10 +15,19 @@ module DayFive
 
     sig { returns(T::Array[[Integer, Integer]]) }
     def range
-      xs = @start_x < @end_x ? @start_x..@end_x : @end_x..@start_x
-      ys = @start_y < @end_y ? @start_y..@end_y : @end_y..@start_y
+      xs = (@start_x < @end_x ? @start_x..@end_x : @end_x..@start_x).to_a
+      ys = (@start_y < @end_y ? @start_y..@end_y : @end_y..@start_y).to_a
 
-      xs.to_a.product(ys.to_a)
+      # "Because of the limits of the hydrothermal vent mapping system, the
+      # lines in your list will only ever be horizontal, vertical, or a diagonal
+      # line at exactly 45 degrees."
+      biggest_difference = [(start_x - end_x).abs, (start_y - end_y).abs].max
+      (0..biggest_difference).map do |i|
+        [
+          i >= xs.count ? xs.fetch(0) : xs.fetch(i),
+          i >= ys.count ? ys.fetch(0) : ys.fetch(i)
+        ]
+      end
     end
   end
 
@@ -33,14 +42,14 @@ module DayFive
 
   sig { returns(Integer) }
   def self.part_one
-    num_vents_by_position = T.let(Hash.new { 0 }, T::Hash[[Integer, Integer], Integer])
+    num_vents_by_position = T.let({}, T::Hash[[Integer, Integer], Integer])
 
     load_input.select do |vent|
       # "For now, only consider horizontal and vertical lines: lines where either x1 = x2 or y1 = y2."
       vent.start_x == vent.end_x || vent.start_y == vent.end_y
     end.each do |vent|
       vent.range.each do |x, y|
-        num_vents_by_position[[x, y]] = T.must(num_vents_by_position[[x, y]]) + 1
+        num_vents_by_position[[x, y]] = num_vents_by_position.fetch([x, y], 0) + 1
       end
     end
 
@@ -49,9 +58,19 @@ module DayFive
 
   sig { returns(Integer) }
   def self.part_two
-    -1
+    num_vents_by_position = T.let({}, T::Hash[[Integer, Integer], Integer])
+
+    load_input.each do |vent|
+      vent.range.each do |x, y|
+        num_vents_by_position[[x, y]] = num_vents_by_position.fetch([x, y], 0) + 1
+      end
+    end
+
+    num_vents_by_position.select { |_k, v| v > 1 }.count
   end
 end
+
+raise DayFive.part_one.to_s unless DayFive.part_one == 6841
 
 puts DayFive.part_one
 puts DayFive.part_two
