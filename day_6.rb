@@ -55,7 +55,13 @@ module DayFive
 
   sig { returns(Integer) }
   def self.part_two
-    -1
+    school = LanternfishSchool.new(load_input)
+
+    256.times do
+      school.iterate
+    end
+
+    school.buckets.sum
   end
 end
 
