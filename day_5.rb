@@ -15,17 +15,28 @@ module DayFive
 
     sig { returns(T::Array[[Integer, Integer]]) }
     def range
-      xs = (@start_x < @end_x ? @start_x..@end_x : @end_x..@start_x).to_a
-      ys = (@start_y < @end_y ? @start_y..@end_y : @end_y..@start_y).to_a
-
       # "Because of the limits of the hydrothermal vent mapping system, the
       # lines in your list will only ever be horizontal, vertical, or a diagonal
       # line at exactly 45 degrees."
       biggest_difference = [(start_x - end_x).abs, (start_y - end_y).abs].max
       (0..biggest_difference).map do |i|
+        x = if @start_x == @end_x
+              @start_x
+            elsif start_x < end_x
+              start_x + i
+            else
+              start_x - i
+            end
+        y = if @start_y == @end_y
+              @start_y
+            elsif start_y < end_y
+              start_y + i
+            else
+              start_y - i
+            end
         [
-          i >= xs.count ? xs.fetch(0) : xs.fetch(i),
-          i >= ys.count ? ys.fetch(0) : ys.fetch(i)
+          x,
+          y
         ]
       end
     end
@@ -69,8 +80,6 @@ module DayFive
     num_vents_by_position.select { |_k, v| v > 1 }.count
   end
 end
-
-raise DayFive.part_one.to_s unless DayFive.part_one == 6841
 
 puts DayFive.part_one
 puts DayFive.part_two

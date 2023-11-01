@@ -407,3 +407,10 @@ not a fan of having to do a T.must() in there instead of doing +=, doesn't seem 
 oh well
 
 ok, did a day of 2020 in python to prep for an interview, back to ruby 2021
+
+day 5 part 2 wrong so far
+i think it's handling this one incorrectly
+8,0 -> 0,8
+
+yeah definitely not doing that right
+fixed
