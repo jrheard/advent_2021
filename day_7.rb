@@ -34,7 +34,11 @@ module DaySeven
 
   sig { returns(Integer) }
   def self.part_two
-    -1
+    crab_positions = load_input
+    best_position = (crab_positions.sum / crab_positions.size.to_f).floor
+    crab_positions.map do |position|
+      (0..(best_position - position).abs).sum
+    end.sum
   end
 end
 

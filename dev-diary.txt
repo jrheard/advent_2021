@@ -442,3 +442,22 @@ ok day 7
   they say position 2 is the best
   the avg is 4
   median is 2
+
+part 1 done ez
+
+https://sorbet.org/docs/intersection-types
+  neat
+
+ok part 2 seems to want avg
+hm but wait
+
+the example they give has an average of 4.9, with a best index of 5
+but the full puzzle input has an average of 465.615, with a best index of 465
+why?
+
+i don't really care :p but it's curious
+maybe it's a modified average
+where like, given each value, you calculate (average of all items except for that value) / (num of all items except for that value)
+wait, but then how would you decide which one of those averages to pick?
+i dunno man
+i don't think i need to get to the bottom of this, gonna move on w my life
