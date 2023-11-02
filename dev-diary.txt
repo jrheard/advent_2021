@@ -414,3 +414,31 @@ i think it's handling this one incorrectly
 
 yeah definitely not doing that right
 fixed
+
+6 was easy, parts 1 and 2
+
+https://github.com/Shopify/tapioca
+  looks like this is mainly for generating rbi files for dependencies
+  seems like i'll have to get super familiar w this if i end up having to deal w rails annotations
+
+  https://sorbet.org/blog/2022/07/27/srb-tapioca
+
+  so sorbet is from stripe and tapioca is from shopify
+  neat
+
+https://sorbet.org/docs/stdlib-generics
+
+ok day 7
+  Crab submarines have limited fuel, so you need to find a way to make all of
+  their horizontal positions match while requiring them to spend as little fuel
+  as possible.
+
+  wonder if median or avg is best here
+  avg?
+
+  they give this example list:
+  16,1,2,0,4,2,7,1,2,14
+
+  they say position 2 is the best
+  the avg is 4
+  median is 2
