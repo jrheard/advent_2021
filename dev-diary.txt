@@ -461,3 +461,30 @@ where like, given each value, you calculate (average of all items except for tha
 wait, but then how would you decide which one of those averages to pick?
 i dunno man
 i don't think i need to get to the bottom of this, gonna move on w my life
+
+ok 8 part 1 was all right but part 2 is making me actually engage w the prompt
+and the prompt is a bit involved/confusing
+so how can we construct, like, a chain of segment deduction based on our base digits 1, 4, 7, 8?
+
+  we know that if the signal is 2, 3, 4, or 7 wires, it's a specific digit
+  otherwise, it's 0, 2, 3, 5, 6, or 9
+
+  1 gives us two right_side_segments
+  7 give us top_segment
+
+  solved:
+  9: is like 4 but with top_segment
+  6: like 8 but missing one segment found in right_side_segments
+  0: like 8 but missing one segment found in 4
+  5: like 6 but missing one segment found in 0
+  3: like 8 but missing two segments found in 0 (that aren't right side or top segments)
+
+  2: base case
+
+man this one is a real pain
+
+man i just don't even really want to do this one
+i think i'm gonna skip it
+the code i'm writing for it is just such garbage
+
+this guy's solution is good https://www.reddit.com/r/adventofcode/comments/rbj87a/comment/hnoyy04/
