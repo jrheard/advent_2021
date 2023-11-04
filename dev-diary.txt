@@ -488,3 +488,21 @@ i think i'm gonna skip it
 the code i'm writing for it is just such garbage
 
 this guy's solution is good https://www.reddit.com/r/adventofcode/comments/rbj87a/comment/hnoyy04/
+
+ok back to it
+decided not to do 8 part 2
+let's do 9
+
+  Your first goal is to find the low points - the locations that are lower than
+  any of its adjacent locations. Most locations have four adjacent locations (up,
+  down, left, and right); locations on the edge or corner of the map have three or
+  two adjacent locations, respectively. (Diagonal locations do not count as adjacent.)
+
+gonna have to keep perf in mind, the full input is really big so i can't be doing on^2 or worse
+
+so for starters this'll be a 1d array rather than a 2d one bc that helps w perf
+aside from that i'm not immediately sure what else i can do aside from loop over everything and check its neighbors,
+which i would expect to be o(m*n) where m is between 2 and 4, which seems ok
+it's a lot of lookups but hopefully nothing too crazy
+
+i dunno let's start w that and see how it runs
