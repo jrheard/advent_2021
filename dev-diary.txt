@@ -508,3 +508,13 @@ it's a lot of lookups but hopefully nothing too crazy
 i dunno let's start w that and see how it runs
 
 ok cool, that was fun to implement, part 1 runs fast enough and gets right answer
+
+ok for a second i was worried that part 2 was gonna be tough perf wise
+but i think all i have to do is first find the low points
+and then do essentially a flood-fill from each of them
+checking each neighbor that has a value that's not 9
+
+  A basin is all locations that eventually flow downward to a single low point.
+  Therefore, every low point has a basin, although some basins are very small.
+  Locations of height 9 do not count as being in any basin, and all other
+  locations will always be part of exactly one basin.
