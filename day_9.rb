@@ -47,7 +47,34 @@ module DayNine
 
   sig { returns(Integer) }
   def self.part_one
-    -1
+    height_map = load_input
+
+    # "Your first goal is to find the low points - the locations that are lower
+    # than any of its adjacent locations. Most locations have four adjacent
+    # locations (up, down, left, and right); locations on the edge or corner of
+    # the map have three or two adjacent locations, respectively. (Diagonal
+    # locations do not count as adjacent.)"
+    low_points = (0..height_map.height - 1).map do |y|
+      (0..height_map.width - 1).select do |x|
+        position_value = height_map.value_at(x, y)
+        height_map.neighbor_values(x, y).select do |neighbor_value|
+          neighbor_value <= position_value
+        end.count.zero?
+      end.map do |x|
+        [x, y]
+      end
+    end.flatten(1)
+
+    # "The risk level of a low point is 1 plus its height. In the above example,
+    # the risk levels of the low points are 2, 1, 6, and 6. The sum of the risk
+    # levels of all low points in the heightmap is therefore 15."
+    #
+    # "Find all of the low points on your heightmap. What is the sum of the risk
+    # levels of all low points on your heightmap?"
+
+    low_points.map do |x, y|
+      height_map.value_at(x, y) + 1
+    end.sum
   end
 
   sig { returns(Integer) }

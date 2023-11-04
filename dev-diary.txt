@@ -506,3 +506,5 @@ which i would expect to be o(m*n) where m is between 2 and 4, which seems ok
 it's a lot of lookups but hopefully nothing too crazy
 
 i dunno let's start w that and see how it runs
+
+ok cool, that was fun to implement, part 1 runs fast enough and gets right answer
