@@ -521,3 +521,21 @@ checking each neighbor that has a value that's not 9
 
 part 2 done
 that was fun! i liked day 9 a lot, good exercise for practicing ruby
+
+https://sorbet.org/docs/abstract
+  tools for writing interfaces
+
+  so much discussion about inheritance/mixins
+  barf barf barf
+
+  barffff
+
+https://sorbet.org/docs/sealed
+  every class should be sealed :p
+
+  ADTs, neat!
+  worth remembering!
+
+although there's also T.any(), not sure if there's a super huge reason to use sealed classes over that
+aside from the "benefit" of having a parent class / being able to do a bit more runtime reflection i guess?
+T.any seems fine though?
