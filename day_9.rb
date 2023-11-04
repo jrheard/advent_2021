@@ -1,6 +1,7 @@
 # typed: strict
 
 require 'sorbet-runtime'
+require 'set'
 
 module DayNine
   extend T::Sig
@@ -17,8 +18,8 @@ module DayNine
       @contents.fetch(y * @width + x)
     end
 
-    sig { params(x: Integer, y: Integer).returns(T::Enumerable[Integer]) }
-    def neighbor_values(x, y)
+    sig { params(x: Integer, y: Integer).returns(T::Array[T::Array[Integer]]) }
+    def neighbor_positions(x, y)
       [
         [x + 1, y],
         [x - 1, y],
@@ -26,8 +27,13 @@ module DayNine
         [x, y - 1]
       ].select do |xx, yy|
         xx >= 0 && xx < @width && yy >= 0 && yy < @height
-      end.map do |xx, yy|
-        value_at(xx, yy)
+      end
+    end
+
+    sig { params(x: Integer, y: Integer).returns(T::Enumerable[Integer]) }
+    def neighbor_values(x, y)
+      neighbor_positions(x, y).map do |xx, yy|
+        value_at(T.must(xx), T.must(yy))
       end
     end
 
@@ -48,6 +54,35 @@ module DayNine
           [x, y]
         end
       end.flatten(1)
+    end
+
+    # "A basin is all locations that eventually flow downward to a single low
+    # point. Therefore, every low point has a basin, although some basins are
+    # very small. Locations of height 9 do not count as being in any basin,
+    # and all other locations will always be part of exactly one basin."
+    sig { params(x: Integer, y: Integer).returns(T::Set[T::Array[Integer]]) }
+    def find_basin_from_starting_point(x, y)
+      basin = Set.new([[x, y]])
+      unseen_positions = T.let(Set.new(neighbor_positions(x, y)), T::Set[T::Array[Integer]])
+
+      until unseen_positions.empty?
+        position = T.must(unseen_positions.first)
+        unseen_positions.delete(position)
+
+        xx = position.fetch(0)
+        yy = position.fetch(1)
+        next unless value_at(xx, yy) != 9
+
+        basin.add(position)
+
+        neighbor_positions(xx, yy).select do |neighbor_position|
+          !basin.include?(neighbor_position) && !unseen_positions.include?(neighbor_position)
+        end.each do |neighbor_position|
+          unseen_positions.add(neighbor_position)
+        end
+      end
+
+      basin
     end
   end
 
@@ -81,7 +116,14 @@ module DayNine
 
   sig { returns(Integer) }
   def self.part_two
-    -1
+    height_map = load_input
+
+    basins = height_map.low_points.map do |x, y|
+      height_map.find_basin_from_starting_point(T.must(x), T.must(y))
+    end
+
+    # "Find the three largest basins and multiply their sizes together."
+    T.let(T.must(basins.map(&:count).sort.reverse[0..2]).reduce(:*), Integer)
   end
 end
 

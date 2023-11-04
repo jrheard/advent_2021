@@ -518,3 +518,6 @@ checking each neighbor that has a value that's not 9
   Therefore, every low point has a basin, although some basins are very small.
   Locations of height 9 do not count as being in any basin, and all other
   locations will always be part of exactly one basin.
+
+part 2 done
+that was fun! i liked day 9 a lot, good exercise for practicing ruby
