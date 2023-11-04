@@ -1,7 +1,6 @@
 # typed: strict
 
 require 'sorbet-runtime'
-require 'set'
 
 module DayNine
   extend T::Sig
